@@ -79,6 +79,9 @@ export default function AuthPage() {
                 className="w-full px-4 py-3 rounded-lg bg-slate-900 border border-slate-600 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500/50"
                 placeholder="••••••••"
               />
+              <p className="text-xs text-slate-400 mt-1">
+                Password must be at least 6 characters long, start with a capital letter, and contain at least one special symbol (e.g., @, #, $, !).
+              </p>
             </div>
 
             {mode === 'login' && (
