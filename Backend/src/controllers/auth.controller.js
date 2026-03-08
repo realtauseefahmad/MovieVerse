@@ -33,7 +33,11 @@ async function userRegister(req, res) {
         expiresIn: '3d'
     })
 
-    res.cookie("token", token)
+    res.cookie("token", token, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "None"
+    });
 
     res.status(201).json({
         message: "User Register Successfully",
@@ -90,7 +94,11 @@ async function userLogin(req, res) {
         { expiresIn: "3d" }
     )
 
-    res.cookie("token", token)
+    res.cookie("token", token, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "None"
+    });
 
     res.status(201).json({
         message: "User Logged In Successfully",

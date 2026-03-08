@@ -19,9 +19,12 @@ const app = expess();
 app.use(expess.json());
 app.use(cookieParser())
 app.use(cors({
-    credentials: true,
-    origin: "https://movie-verse-nu.vercel.app/"
-}))
+  origin: [
+    "http://localhost:5173",
+    "https://movie-verse-nu.vercel.app"
+  ],
+  credentials: true
+}));
 
 
 
