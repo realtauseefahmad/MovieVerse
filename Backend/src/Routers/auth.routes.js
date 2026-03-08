@@ -1,6 +1,8 @@
 const express = require('express');
 const authController = require('../controllers/auth.controller');
 const authMiddleware = require("../middlewares/auth.middleware")
+const { registerValidationRules, validateRegister } = require("../validator/auth.validator")
+
 
 const router = express.Router();
 
@@ -9,7 +11,7 @@ const router = express.Router();
  * @route POST /auth/register
  * @desc Register a new user
  */
-router.post("/register",authController.userRegister);
+router.post("/register", registerValidationRules, validateRegister, authController.userRegister);
 
 
 /**
