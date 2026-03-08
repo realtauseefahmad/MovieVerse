@@ -1,5 +1,6 @@
 const expess = require('express');
 const cookieParser = require('cookie-parser');
+const cors = require("cors")
 
 /**
  *  Routers require
@@ -17,6 +18,10 @@ const adminRoutes = require("./Routers/admin.routes")
 const app = expess();
 app.use(expess.json());
 app.use(cookieParser())
+app.use(cors({
+    credentials: true,
+    origin: "http://localhost:5173"
+}))
 
 
 

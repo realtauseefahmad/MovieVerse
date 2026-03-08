@@ -37,11 +37,12 @@ async function userRegister(req, res) {
 
     res.status(201).json({
         message: "User Register Successfully",
+        token,
         user: {
             _id: user._id,
-            name: user.name,
             username: user.username,
-            email: user.email
+            email: user.email,
+            role: user.role,
         }
     })
 }
@@ -61,6 +62,13 @@ async function userLogin(req, res) {
         return res.status(400).json({
             success: false,
             message: "Invalid credentials"
+        });
+    }
+
+    if (user.isBanned) {
+        return res.status(403).json({
+            success: false,
+            message: "Your account has been banned"
         });
     }
 
@@ -86,22 +94,29 @@ async function userLogin(req, res) {
 
     res.status(201).json({
         message: "User Logged In Successfully",
+        token,
         user: {
             _id: user._id,
-            name: user.name,
             username: user.username,
-            email: user.email
+            email: user.email,
+            role: user.role,
         }
     })
 }
 
 async function getProfile(req, res) {
     try {
-        const user = await userModel.findById(req.userId);
+        const user = await userModel.findById(req.user.id);
         if (!user) {
             return res.status(404).json({
                 success: false,
                 message: "User not found"
+            });
+        }
+        if (user.isBanned) {
+            return res.status(403).json({
+                success: false,
+                message: "Your account has been banned"
             });
         }
         res.status(200).json({
@@ -111,6 +126,7 @@ async function getProfile(req, res) {
                 _id: user._id,
                 username: user.username,
                 email: user.email,
+                role: user.role,
             }
         });
     } catch (error) {
