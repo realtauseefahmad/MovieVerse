@@ -36,8 +36,8 @@ async function userRegister(req, res) {
     res.cookie("token", token)
 
     res.status(201).json({
-        message:"User Register Successfully",
-        user:{
+        message: "User Register Successfully",
+        user: {
             _id: user._id,
             name: user.name,
             username: user.username,
@@ -73,15 +73,20 @@ async function userLogin(req, res) {
         });
     }
 
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-        expiresIn: '3d'
-    })
+    const token = jwt.sign(
+        {
+            id: user._id,
+            role: user.role
+        },
+        process.env.JWT_SECRET,
+        { expiresIn: "3d" }
+    )
 
     res.cookie("token", token)
 
     res.status(201).json({
-        message:"User Logged In Successfully",
-        user:{
+        message: "User Logged In Successfully",
+        user: {
             _id: user._id,
             name: user.name,
             username: user.username,

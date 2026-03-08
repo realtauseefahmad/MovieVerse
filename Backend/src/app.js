@@ -9,6 +9,7 @@ const movieRoutes = require("./Routers/movie.routes")
 const favoriteRoutes = require("./Routers/favorite.routes")
 const watchRoutes = require("./Routers/watchlist.routes")
 const historyRoutes = require("./Routers/history.routes")
+const adminRoutes = require("./Routers/admin.routes")
 
 
 
@@ -28,6 +29,7 @@ app.use("/movies", movieRoutes)
 app.use("/favorites", favoriteRoutes)
 app.use("/watchlist", watchRoutes)
 app.use("/history", historyRoutes)
+app.use("/admin", adminRoutes)
 
 
 module.exports = app;
